@@ -1,5 +1,5 @@
 # Enterprise Terraform 
-## AWS Core Security
+## Cumberland Cloud Core Security
 ### Secret Manager
 
 Documentation goes here.
@@ -23,15 +23,11 @@ provider "aws" {
 
 ```
 module "secret" {
-	source          		= "ssh://git@source.mdthink.maryland.gov:22/etm/mdt-eter-aws-core-security-sm?depth=1.git"
+	source 					= "github.com/cumberland-terraform/security-sg"
 	
 	platform				= {
-		aws_region          = "<region-name>"
-        account             = "<account-name>"
-        acct_env            = "<account-environment>"
-        agency              = "<agency>"
-        program             = "<program>"
-        pca                 = "<pca-code>"
+		client          	= "<client>"
+    	environment         = "<environment>"
 	}
 
 	secret 					= {
@@ -43,12 +39,12 @@ module "secret" {
 
 }
 ```
-
-`platform` is a parameter for *all* **MDThink Enterprise Terraform** modules. For more information about the `platform`, in particular the permitted values of the nested fields, see the [mdt-eter-platform documentation](https://source.mdthink.maryland.gov/projects/etm/repos/mdt-eter-platform/browse). The following section goes into more detail regarding the `ec2` variable.
+**NOTE**: `platform` is a parameter for *all* **Cumberland Cloud** modules. For more information about the `platform`, in particular the permitted values of the nested fields, refer to the platform module documentation. The following section goes into more detail regarding the `sg` variable.
+on goes into more detail regarding the `ec2` variable.
 
 ### Parameters
 
-There are two main parameters to be aware of when using `mdt-eter-core-security-sm`:
+There are two main parameters to be aware of when using `security-sm`:
 
 1. `secret`: This is an object that represents the configuration for a secret. This object contains several properties that allow the user to generate the value of the secret within the module. This is the recommended use of this module. By generating the secret within the module, it stays out of the Terraform state.
 	- `suffix`: (*Required*) This is the suffix appended to the end of the secret name.
