@@ -1,6 +1,6 @@
 # Enterprise Terraform 
-## Cumberland Cloud Core Security
-### Secret Manager
+## Cumberland Cloud Platform
+## AWS Security - Secrets Manager
 
 Documentation goes here.
 

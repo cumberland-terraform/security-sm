@@ -1,14 +1,8 @@
 variable "platform" {
   description                           = "Platform metadata configuration object. See [Platform Module] (https://source.mdthink.maryland.gov/projects/etm/repos/mdt-eter-platform/browse) for detailed information about the permitted values for each field."
   type                                  = object({
-    aws_region                          = string 
-    account                             = string
-    agency                              = string
-    app                                 = string
-    acct_env                            = optional(string, null)
-    app_env                             = optional(string, null)
-    pca                                 = optional(string, null)
-    program                             = optional(string, null)
+    client                              = string
+    environment                         = string
   })
 }
 
