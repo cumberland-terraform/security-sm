@@ -43,7 +43,7 @@ locals {
                                 ) : var.value
                                 
     unmerged_policy_principals  = local.conditions.root_principal ? [
-                                    module.platform.aws.arn.root
+                                    module.platform.aws.arn.iam.root
                                 ] : var.secret.policy_principals
 
     policy                      = local.conditions.merge ? (
