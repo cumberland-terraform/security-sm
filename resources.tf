@@ -31,7 +31,7 @@ resource "aws_secretsmanager_secret" "secret" {
     lifecycle {
         # TF is interpretting the tag calculations as a modification everytime 
         #   a plan is run, so ignore until issue is resuled.
-        ignore_changes          = [ tags ]
+        ignore_changes          = [ tags, description ]
     }
 } 
 
