@@ -13,7 +13,7 @@ locals {
     conditions                  = {
         merge                   = var.secret.additional_policies != null
         root_principal          = var.secret.policy_principals == null
-        provision_kms_key       = var.secret.kms_key == null
+        provision_kms_key       = var.kms == null
         is_random               = var.secret.random.enabled
         is_key                  = var.secret.ssh_key.enabled
     }
@@ -22,16 +22,16 @@ locals {
     #   Variables that change based on the deployment configuration. 
     kms_key_id                  = local.conditions.provision_kms_key ? (
                                     module.kms[0].key.id
-                                ) : !var.secret.kms_key.aws_managed ? (
-                                    var.secret.kms_key.id
+                                ) : !var.kms.aws_managed ? (
+                                    var.kms.id
                                 ) : null
 
     tags                        = merge({
         # TODO: Secret specific tags
     }, module.platform.tags)
 
-    name                        = upper(join("-", [
-                                    "SM",
+    # TODO: should use path for secret name, e.g. prod/agn/etc
+    name                        = lower(join("-", [
                                     module.platform.prefix,
                                     var.secret.suffix
                                 ]))
