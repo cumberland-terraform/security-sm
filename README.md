@@ -37,8 +37,25 @@ module "secret" {
 		}
 	}
 
+	kms 					= {
+		aws_managed 		= true
+	}
+
 }
 ```
 
-**NOTE**: `platform` is a parameter for *all* **Cumberland Cloud** modules. For more information about the `platform`, in particular the permitted values of the nested fields, refer to the platform module documentation. The following section goes into more detail regarding the `sg` variable.
-on goes into more detail regarding the `ec2` variable.
+`platform` is a parameter for *all* **Cumberland Cloud** modules. For more information about the `platform`, in particular the permitted values of the nested fields, see the ``platform`` module documentation. 
+
+## KMS Key Deployment Options
+
+### 1: Module Provisioned Key
+
+If the `var.kms` is set to `null` (default value), the module will attempt to provision its own KMS key. This means the role assumed by Terraform in the `provider` 
+
+### 2: User Provided Key
+
+If the user of the module prefers to use a pre-existing customer managed key, the `id`, `arn` and `alias_arn` of the `var.kms` variable must be passed in. This will override the provisioning of the KMS key inside of the module.
+
+### 3: AWS Managed Key
+
+If the user of the module prefers to use an AWS managed KMS key, the `var.kms.aws_managed` property must be set to `true`.
